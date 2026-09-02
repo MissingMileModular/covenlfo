@@ -18,8 +18,8 @@
 #define POT 1
 
 
-#define HZPHASOR 91183 //phasor value for 1 hz.
-
+//#define HZPHASOR 91183 //phasor value for 1 hz.
+#define HZPHASOR 91625
 
 long unsigned int accumulator1 = 0;
 long unsigned int accumulator2 = 0;
@@ -30,7 +30,7 @@ long unsigned int phasor2;
 long unsigned int phasor3;
 long unsigned int phasor4;
 
-char randNum[4];
+unsigned int randNum[4];
 
 FlashStorage(div_storage, int);
 FlashStorage(wave_storage, int);
@@ -253,7 +253,7 @@ void loop() {
           debounceState = 3;
           debounceTime=millis();
           divSelect++;
-            if(divSelect>3){
+            if(divSelect>DIVSIZE){
                divSelect=1;
             }
 
@@ -460,7 +460,7 @@ void TCC0_Handler()
    accumulator2 = accumulator2 + phasor2;
    accumulator3 = accumulator3 + phasor3;
    accumulator4 = accumulator4 + phasor4;
-   delayMicroseconds(6);
+   //delayMicroseconds(6);
    REG_TCC0_CC0 = generator(accumulator1, waveSelect,3); // pin 9 //#4
    REG_TCC0_CC1 = generator(accumulator4, waveSelect,0); // pin 2 //#1
    REG_TCC0_CC2 = generator(accumulator2, waveSelect,1); // pin 1 //#2  
