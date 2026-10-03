@@ -64,7 +64,20 @@ Design notes, known tuning points, and things still to verify on a scope are in 
 
 Follow the Arduino setup in [How to Hack Your Coven LFO](#how-to-hack-your-coven-lfo) below, then open the `.ino` inside the folder you want, for example `MMM_lfo_mk4/MMM_lfo_mk4.ino`. The folder name must match the `.ino` name, and `antilog.h` must sit next to it.
 
-There is no prebuilt UF2 for the custom firmware yet. `CovenLFO-9Bit.uf2` in the repo root is the stock CCTV firmware.
+## Prebuilt UF2
+
+Two UF2 files are in the repo root. Flash either one with the steps in [How to Update using UF2](#how-to-update-using-uf2) below.
+
+| File | Firmware |
+|---|---|
+| `MMM_lfo_mk4.uf2` | Missing Mile Modular mk4, modes 1–9 |
+| `CovenLFO-9Bit.uf2` | Stock CCTV firmware, modes 1–4 |
+
+To build a UF2 yourself, use Sketch → Export Compiled Binary in the Arduino IDE, then convert the exported `.bin` with `uf2conv.py` from [microsoft/uf2](https://github.com/microsoft/uf2):
+
+```
+python3 uf2conv.py -c -f SAMD21 -b 0x2000 -o MMM_lfo_mk4.uf2 MMM_lfo_mk4/build/Seeeduino.samd.seeed_XIAO_m0/MMM_lfo_mk4.ino.bin
+```
 
 ## Credits
 
